@@ -1,12 +1,14 @@
 <div class="message">
-    <h1>Wiadomość {{message.id}}</h1>
-    <ul>
-        <li>Tytuł: {{message.subject}}</li>
-        <li>Od: {{message.from}}</li>
-        <li>Do: {{message.to}}</li>
-        <li>Treść:
-            <div class="">
-                {{message.content}}
-            </div></li>
-    </ul>
+<h1>Wiadomość {{message.id}}</h1>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{message.subject}}</h3>
+    </div>
+    <div class="panel-body">
+        {{message.content}}
+    </div>
+    <div class="panel-footer">
+        Od: {{message.from}} Do: {{message.to}}
+    </div>
+</div>
 </div>

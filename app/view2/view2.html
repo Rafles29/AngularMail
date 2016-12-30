@@ -2,17 +2,19 @@
   <h1>Skrzynka pocztowa</h1>
   <table class="table table-striped table-hover">
     <tr>
-      <td class="col-sm-2">Od</td>
-      <td class="col-sm-2">Do</td>
-      <td class="col-sm-2">Temat</td>
-      <td class="col-sm-2">Nieprzczytane</td>
-      <td class="col-sm-2">Usuń</td>
-      <td class="col-sm-2">Zmień status</td>
+      <th class="col-sm-1">ID</th>
+      <th class="col-sm-1">Od</th>
+      <th class="col-sm-1">Do</th>
+      <th class="col-sm-3">Temat</th>
+      <th class="col-sm-2">Nieprzczytane</th>
+      <th class="col-sm-2">Usuń</th>
+      <th class="col-sm-2">Zmień status</th>
     </tr>
     <tr ng-repeat="message in inbox | filter:box">
-      <td class="col-sm-2">{{message.from}}</td>
-      <td class="col-sm-2">{{message.to}}</td>
-      <td class="col-sm-2">{{message.subject}}</td>
+      <td class="col-sm-1">{{message.id}}</td>
+      <td class="col-sm-1">{{message.from}}</td>
+      <td class="col-sm-1">{{message.to}}</td>
+      <td class="col-sm-3">{{message.subject}}</td>
       <td class="col-sm-2">{{message.unread}}</td>
       <td class="col-sm-2"><a href="" ng-click="del($index)"><span class="glyphicon glyphicon-remove"></span></a></td>
       <td class="col-sm-2"><a href="" ng-click="changeStatus($index)"><span class="glyphicon glyphicon-ok"></span></a></td>
