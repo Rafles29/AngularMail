@@ -3,6 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+    'myApp.view',
+    'myApp.login',
   'myApp.view1',
   'myApp.view2',
     'myApp.view3',
@@ -11,7 +13,7 @@ angular.module('myApp', [
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/view'});
 }]);
 
 $("#menu-toggle").click(function(e) {
