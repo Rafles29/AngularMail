@@ -3,25 +3,20 @@
 angular.module('myApp.login', [])
 
     .factory('login', ['$http', function ($http) {
-        var token = '';
         return {
-            setToken: function (login, password) {
+            setToken: function (login, password, callback) {
                 $http({
                     method: 'POST',
-                    url: 'http://edi.iem.pw.edu.pl/bach/mail/api/factories',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    url: 'http://edi.iem.pw.edu.pl/bach/mail/api/login',
                     data: {
                         "login": login,
                         "password": password
-                    }
-                }).success(function (response) {
-                    token = response;
+                    },
+                    cache: true
+
+                }).success(callback).error(function () {
+                    console.log('ups');
                 });
-            },
-            getToken : function () {
-                return token;
             }
         };
 

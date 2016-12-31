@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.view2', ['ngRoute', 'myApp.login'])
 
 .config(['$routeProvider' , function($routeProvider) {
   $routeProvider.when('/view2/:box', {
@@ -9,10 +9,16 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['$scope','$http', '$routeParams',function($scope, $http, $routeParams) {
-    $http.get('messages.json').success(function (data) {
+.controller('View2Ctrl', ['$scope','$http', '$routeParams', 'login',function($scope, $http, $routeParams, login) {
+    /*$http.get('messages.json').success(function (data) {
         $scope.inbox = data;
+    });*/
+
+    login.setToken("bach","to-nie-ja", function (res) {
+        console.log(res);
     });
+
+
 
     $scope.del = function (index) {
         $scope.inbox.splice(index, 1);
