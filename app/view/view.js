@@ -9,6 +9,14 @@ angular.module('myApp.view', ['ngRoute','myApp.login'])
         });
     }])
 
-    .controller('ViewCtrl', ['$scope','$http',function($scope) {
+    .controller('ViewCtrl', ['$rootScope','$scope','login' ,function($rootScope,$scope,login) {
 
+        $scope.login = "bach";
+        $scope.password = "to-nie-ja";
+        $scope.check = function() {
+            login.setToken($scope.login,$scope.password, function (res) {
+                $rootScope.token = res;
+                console.log($rootScope.token);
+            });
+        };
     }]);

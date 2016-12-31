@@ -18,8 +18,6 @@ angular.module('myApp.view2', ['ngRoute', 'myApp.login'])
         console.log(res);
     });
 
-
-
     $scope.del = function (index) {
         $scope.inbox.splice(index, 1);
     };
