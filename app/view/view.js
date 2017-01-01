@@ -19,9 +19,8 @@ angular.module('myApp.view', ['ngRoute','myApp.login'])
         $scope.check = function() {
             login.setToken($scope.login,$scope.password, function (res) {
                 $rootScope.token = res.token.toString();
+                $rootScope.logged = true;
             });
-            $rootScope.logged = true;
-            console.log($rootScope.logged);
         };
         $scope.logOut = function () {
             $rootScope.logged = false;

@@ -1,5 +1,5 @@
 <div class="message">
-<h1>Wiadomość {{message.id}}</h1>
+<h1 class="text-center">Wiadomość {{message.id}}</h1>
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">{{message.subject}}</h3>
@@ -11,4 +11,8 @@
         Od: {{message.from}} Do: {{message.to}}
     </div>
 </div>
+    <div>
+        <a href="" ng-click="back()" class="btn btn-lg btn-success">Back</a>
+    </div>
 </div>
+
