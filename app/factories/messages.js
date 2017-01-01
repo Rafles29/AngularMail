@@ -33,8 +33,28 @@ angular.module('myApp.messages', [])
                 console.log(response.data);
             })
         }
+        function sendMessage(token, msg,callback) {
+            $http({
+                method: 'POST',
+                url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages',
+                headers: {
+                    "Content-Type": "application/json",
+                    "token" : token
+                },
+                data: {
+                    "content": msg.content,
+                    "from": msg.from, "to": msg.to,
+                    "subject": msg.subject
+                }
+            }).then(callback, function (response) {
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+            })
+        }
         return {
             messages: getMessages,
-            message: getMessage
+            message: getMessage,
+            send: sendMessage
         };
     }]);

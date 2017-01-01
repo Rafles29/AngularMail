@@ -1,4 +1,4 @@
-<div class="inbox">
+<div class="inbox" ng-show="logged">
   <h1>Skrzynka pocztowa</h1>
   <table class="table table-striped table-hover">
     <tr>
@@ -20,4 +20,7 @@
       <td class="col-sm-2"><a href="" ng-click="changeStatus($index)"><span class="glyphicon glyphicon-ok"></span></a></td>
     </tr>
   </table>
+</div>
+<div ng-hide="logged">
+  <h2>Musisz się najpierw zalogować</h2>
 </div>

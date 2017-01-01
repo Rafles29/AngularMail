@@ -1,4 +1,4 @@
-<div class="singin">
+<div class="singin" ng-hide="logged">
     <div class="container">
         <form class="form-signin" ng-submit="check()">
             <h2 class="form-signin-heading">Please sign in</h2>
@@ -9,4 +9,8 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
     </div> <!-- /container -->
+</div>
+<div ng-show="logged">
+    <h1>{{login}}</h1>
+    <button class="btn btn-lg btn-info" type="submit" ng-click="logOut()">Log Out</button>
 </div>
