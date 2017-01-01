@@ -16,7 +16,7 @@ angular.module('myApp.login', [])
             }).success(callback).error(function () {
                 console.log('ups');
             });
-        };
+        }
         return {
             setToken: getToken
         };

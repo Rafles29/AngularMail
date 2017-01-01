@@ -11,7 +11,7 @@
       <th class="col-sm-2">Zmień status</th>
     </tr>
     <tr ng-repeat="message in inbox | filter:box">
-      <td class="col-sm-1">{{message.id}}</td>
+      <a><td class="col-sm-1">{{message.id}}</td></a>
       <td class="col-sm-1">{{message.from}}</td>
       <td class="col-sm-1">{{message.to}}</td>
       <td class="col-sm-3">{{message.subject}}</td>
