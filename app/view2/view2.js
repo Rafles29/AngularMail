@@ -11,8 +11,9 @@ angular.module('myApp.view2', ['ngRoute', 'myApp.login', 'myApp.messages'])
 
 .controller('View2Ctrl', ['$rootScope','$scope','$http', '$routeParams', 'messages', function($rootScope,$scope, $http, $routeParams, messages) {
 
-    console.log($rootScope.logged);
+
     if($rootScope.logged) {
+
         var token = $rootScope.token;
         messages.messages(token,function (res) {
             $scope.inbox = res.data;
@@ -24,7 +25,20 @@ angular.module('myApp.view2', ['ngRoute', 'myApp.login', 'myApp.messages'])
             $scope.inbox[index].unread = !$scope.inbox[index].unread;
         };
         $scope.box = $routeParams.box;
-    }
+        $scope.readMsg = function (id, unread) {
+            if(unread == true) {
+                messages.mark(id,false, $rootScope.token, function (response) {
+                    console.log(response.status);
+                    console.log(response.statusText);
+                    console.log(response.data);
+                })
+            }
+        };
+        $scope.isMark = function (box) {
+            if(box == 'inbox') {
+                return true;
+            }else return false;
+        };
 
-    console.log($rootScope.logged);
+    }
 }]);

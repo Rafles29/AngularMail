@@ -14,16 +14,17 @@ angular.module('myApp.view', ['ngRoute','myApp.login'])
         $scope.password = "to-nie-ja";
         if($rootScope.logged == null) {
             $rootScope.logged = false;
-            console.log($rootScope.logged);
         }
         $scope.check = function() {
             login.setToken($scope.login,$scope.password, function (res) {
                 $rootScope.token = res.token.toString();
                 $rootScope.logged = true;
+                login.getID($rootScope.token, $scope.login, function (res) {
+                    $rootScope.myUID = res.uid;
+                })
             });
         };
         $scope.logOut = function () {
             $rootScope.logged = false;
-            console.log($rootScope.logged);
         }
     }]);

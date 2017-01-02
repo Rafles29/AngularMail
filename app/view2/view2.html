@@ -1,23 +1,23 @@
 <div class="inbox" ng-show="logged">
-  <h1>Skrzynka pocztowa</h1>
+  <h1>Skrzynka pocztowa({{box}})</h1>
   <table class="table table-striped table-hover">
     <tr>
       <th class="col-sm-1">ID</th>
-      <th class="col-sm-1">Od</th>
-      <th class="col-sm-1">Do</th>
+      <th class="col-sm-2">Od</th>
+      <th class="col-sm-2">Do</th>
       <th class="col-sm-3">Temat</th>
       <th class="col-sm-2">Nieprzczytane</th>
-      <th class="col-sm-2">Usuń</th>
-      <th class="col-sm-2">Zmień status</th>
+      <th class="col-sm-1">Usuń</th>
+      <th class="col-sm-1">Zmień status</th>
     </tr>
     <tr ng-repeat="message in inbox | filter:box">
-      <td class="col-sm-1"><a href="#!/view1/{{message.id}}">{{message.id}}</a></td>
-      <td class="col-sm-1">{{message.from}}</td>
+      <td class="col-sm-2"><a ng-click="readMsg(message.id,message.unread)" href="#!/view1/{{message.id}}">{{message.id}}</a></td>
+      <td class="col-sm-2">{{message.from}}</td>
       <td class="col-sm-1">{{message.to}}</td>
       <td class="col-sm-3">{{message.subject}}</td>
-      <td class="col-sm-2">{{message.unread}}</td>
-      <td class="col-sm-2"><a href="" ng-click="del($index)"><span class="glyphicon glyphicon-remove"></span></a></td>
-      <td class="col-sm-2"><a href="" ng-click="changeStatus($index)"><span class="glyphicon glyphicon-ok"></span></a></td>
+      <td class="col-sm-">{{message.unread}}</td>
+      <td class="col-sm-1"><a href="" ng-click="del($index)"><span class="glyphicon glyphicon-remove"></span></a></td>
+      <td class="col-sm-1"><a ng-show="isMark(box) "href="" ng-click="changeStatus($index)"><span class="glyphicon glyphicon-ok"></span></a></td>
     </tr>
   </table>
 </div>

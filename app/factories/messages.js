@@ -11,29 +11,50 @@ angular.module('myApp.messages', [])
                 url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages',
                 headers: {
                     "token" : token
-                },
-                cache: true
+                }
             }).then(callback, function (response) {
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
-            })
+            });
         }
-        function getMessage(id,token, callback) {
+        function handleMessage(method,id,token, callback) {
             $http({
-                method: 'GET',
+                method: method,
                 url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages/' + id,
                 headers: {
                     "token" : token
-                },
-                cache: true
+                }
             }).then(callback, function (response) {
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
-            })
+            });
         }
-        function sendMessage(token, msg,callback) {
+        function getMessage(id,token,callback) {
+            handleMessage('GET',id,token,callback);
+        }
+        function deleteMessage(id,token,callback) {
+            handleMessage('DELETE',id,token,callback);
+        }
+        function markMessage(id,mark,token,callback) {
+            $http({
+                method: 'PUT',
+                url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages/' + id,
+                headers: {
+                    "Content-Type": "application/json",
+                    "token" : token
+                },
+                data: {
+                    "unread": mark,
+                }
+            }).then(callback, function (response) {
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+            });
+        }
+        function sentMessage(token, msg,callback) {
             $http({
                 method: 'POST',
                 url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages',
@@ -50,11 +71,13 @@ angular.module('myApp.messages', [])
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
-            })
+            });
         }
         return {
             messages: getMessages,
             message: getMessage,
-            send: sendMessage
+            send: sentMessage,
+            del: deleteMessage,
+            mark: markMessage
         };
     }]);
