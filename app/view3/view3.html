@@ -1,5 +1,5 @@
 <div ng-show="logged">
-    <h2 class="text-center" ng-show="done">Wiadomość wysłana</h2>
+    <h2 class="text-center" ng-show="handler.status">{{handler.msg}}</h2>
     <h3 class="col-sm-offset-2 col-sm-10">Nowa Wiadomość</h3>
     <form class="form-horizontal">
         <div class="form-group">

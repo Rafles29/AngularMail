@@ -11,8 +11,11 @@ angular.module('myApp.view3', ['ngRoute','myApp.messages'])
 
 .controller('View3Ctrl', ['$rootScope','$scope', 'messages',function($rootScope,$scope, messages) {
 
-    console.log($rootScope.logged);
     if($rootScope.logged) {
+        $scope.handler = {
+            status: false,
+            msg: ""
+        };
         $scope.dest = "";
         $scope.subject = "";
         $scope.content = "";
@@ -28,11 +31,24 @@ angular.module('myApp.view3', ['ngRoute','myApp.messages'])
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
+                $scope.handler.msg = 'Wiadomość została wysłana';
+                $scope.handler.status = true;
+
+            }, function (response) {
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+                if(response.data) {
+                    $scope.handler.msg = response.data.errors[0];
+                    $scope.handler.status = true;
+                }else {
+                    $scope.handler.msg = 'Podaj prawidłowego adresata';
+                    $scope.handler.status = true;
+                }
             });
             $scope.to = null;
             $scope.subject = null;
             $scope.content = null;
-            $scope.done = true;
         };
     }
 

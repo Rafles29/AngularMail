@@ -14,15 +14,50 @@ angular.module('myApp.view2', ['ngRoute', 'myApp.login', 'myApp.messages'])
 
     if($rootScope.logged) {
 
-        var token = $rootScope.token;
-        messages.messages(token,function (res) {
+        $scope.error = {
+            error: false,
+            msg: ""
+        };
+
+        messages.messages($rootScope.token,function (res) {
             $scope.inbox = res.data;
         });
-        $scope.del = function (index) {
-            $scope.inbox.splice(index, 1);
+        $scope.del = function (id) {
+            messages.del(id,$rootScope.token, function (response) {
+                $scope.error.error = false;
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+                messages.messages($rootScope.token,function (res) {
+                    $scope.inbox = res.data;
+                });
+            }, function (response) {
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+                $scope.error.msg = response.data.error;
+                $scope.error.error = true;
+            });
         };
-        $scope.changeStatus = function (index) {
-            $scope.inbox[index].unread = !$scope.inbox[index].unread;
+        $scope.changeStatus = function (id, unread) {
+
+            var status = !unread;
+
+            messages.mark(id,status, $rootScope.token, function (response) {
+                $scope.error.error = false;
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+                messages.messages($rootScope.token,function (res) {
+                    $scope.inbox = res.data;
+                }, function (response) {
+                    console.log(response.status);
+                    console.log(response.statusText);
+                    console.log(response.data);
+                    $scope.error.msg = response.data.error;
+                    $scope.error.error = true;
+                });
+            });
         };
         $scope.box = $routeParams.box;
         $scope.readMsg = function (id, unread) {
@@ -31,8 +66,14 @@ angular.module('myApp.view2', ['ngRoute', 'myApp.login', 'myApp.messages'])
                     console.log(response.status);
                     console.log(response.statusText);
                     console.log(response.data);
+                }, function (response) {
+                    console.log(response.status);
+                    console.log(response.statusText);
+                    console.log(response.data);
+                    $scope.error.msg = response.data.error;
+                    $scope.error.error = true;
                 })
-            }
+            };
         };
         $scope.isMark = function (box) {
             if(box == 'inbox') {
