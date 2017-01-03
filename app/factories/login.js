@@ -11,31 +11,39 @@ angular.module('myApp.login', [])
                     "login": login,
                     "password": password
                 }
-            }).success(callback).error(function (response) {
+            }).then(callback, function (response) {
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
             });
         }
-        function getUser(token, link, callback) {
+        function getUserName(token, id, callback) {
             $http({
                 method: 'GET',
-                url: 'http://edi.iem.pw.edu.pl/bach/mail/api/users/' + link,
+                url: 'http://edi.iem.pw.edu.pl/bach/mail/api/users/' + id,
                 headers: {
                     "token" : token
                 },
                 cache: true
-            }).success(callback).error(function (response) {
+            }).then(callback, function (response) {
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
             });
         }
-        function getById(token, id, callback) {
-            getUser(token,id,callback);
-        }
-        function getByName(token, name, callback) {
-            getUser(token,name,callback);
+        function getUserID(token, name, callback) {
+            $http({
+                method: 'GET',
+                url: 'http://edi.iem.pw.edu.pl/bach/mail/api/users/' + name,
+                headers: {
+                    "token" : token
+                },
+                cache: true
+            }).then(callback, function (response) {
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.data);
+            });
         }
         function getAllUsers(token, callback) {
             $http({
@@ -45,16 +53,17 @@ angular.module('myApp.login', [])
                     "token" : token
                 },
                 cache: true
-            }).success(callback).error(function (response) {
+            }).then(callback, function (response) {
                 console.log(response.status);
                 console.log(response.statusText);
                 console.log(response.data);
             });
         }
+
         return {
             setToken: getToken,
-            getName: getById,
-            getID: getByName,
+            getName: getUserName,
+            getID: getUserID,
             getUsers: getAllUsers
         };
     }]);

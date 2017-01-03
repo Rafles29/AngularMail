@@ -17,10 +17,10 @@ angular.module('myApp.view', ['ngRoute','myApp.login'])
         }
         $scope.check = function() {
             login.setToken($scope.login,$scope.password, function (res) {
-                $rootScope.token = res.token.toString();
+                $rootScope.token = res.data.token;
                 $rootScope.logged = true;
                 login.getID($rootScope.token, $scope.login, function (res) {
-                    $rootScope.myUID = res.uid;
+                    $rootScope.myUID = res.data.uid;
                 })
             });
         };
