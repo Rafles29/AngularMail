@@ -1,27 +1,30 @@
 <div class="inbox" ng-show="logged">
-  <h2 ng-show="error.error">{{error.msg}}</h2>
-  <h1>Skrzynka pocztowa({{box}})</h1>
+  <div class="alert alert-danger alert-dismissible" ng-show="error.error">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{error.msg}}
+  </div>
+  <h1 class="text-capitalize">({{box}})</h1>
   <table class="table table-striped table-hover">
     <tr>
       <th class="col-sm-1">ID</th>
-      <th class="col-sm-2">Od</th>
-      <th class="col-sm-2">Do</th>
-      <th class="col-sm-3">Temat</th>
-      <th class="col-sm-2">Nieprzczytane</th>
-      <th class="col-sm-1">Usuń</th>
-      <th class="col-sm-1">Zmień status</th>
+      <th class="col-sm-2">To</th>
+      <th class="col-sm-2">From</th>
+      <th class="col-sm-3">Subject</th>
+      <th class="col-sm-2">Status(unread)</th>
+      <th class="col-sm-1">Delete</th>
+      <th class="col-sm-1">Change Status</th>
     </tr>
     <tr ng-repeat="message in inbox | filter:box">
       <td class="col-sm-2"><a ng-click="readMsg(message.id,message.unread)" href="#!/view1/{{message.id}}">{{message.id}}</a></td>
-      <td class="col-sm-2">{{message.from}}</td>
-      <td class="col-sm-1">{{message.to}}</td>
+      <td class="col-sm-2">{{decode(message.from)}}</td>
+      <td class="col-sm-1">{{decode(message.to)}}</td>
       <td class="col-sm-3">{{message.subject}}</td>
       <td class="col-sm-">{{message.unread}}</td>
       <td class="col-sm-1"><a href="" ng-click="del(message.id)"><span class="glyphicon glyphicon-remove"></span></a></td>
-      <td class="col-sm-1"><a ng-show="isMark(box) "href="" ng-click="changeStatus(message.id,message.unread)"><span class="glyphicon glyphicon-ok"></span></a></td>
+      <td class="col-sm-1"><a ng-show="isMark(box)" href="" ng-click="changeStatus(message.id,message.unread)"><span class="glyphicon glyphicon-ok"></span></a></td>
     </tr>
   </table>
 </div>
 <div ng-hide="logged">
-  <h2>Musisz się najpierw zalogować</h2>
+  <h2>You have to login first</h2>
 </div>

@@ -22,6 +22,15 @@ angular.module('myApp.view2', ['ngRoute', 'myApp.login', 'myApp.messages'])
         messages.messages($rootScope.token,function (res) {
             $scope.inbox = res.data;
         });
+        $scope.decode = function (id) {
+            var index;
+            for(index in $rootScope.users) {
+                if( $rootScope.users[index].uid == id) {
+                    return $rootScope.users[index].username;
+
+                }
+            }
+        };
         $scope.del = function (id) {
             messages.del(id,$rootScope.token, function (response) {
                 $scope.error.error = false;

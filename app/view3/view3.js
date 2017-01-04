@@ -26,24 +26,20 @@ angular.module('myApp.view3', ['ngRoute','myApp.messages'])
                 from: $rootScope.myUID, to: parseInt($scope.dest),
                 subject: $scope.subject
             };
-            console.log(msg);
             messages.send($rootScope.token, msg, function (response) {
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.data);
-                $scope.handler.msg = 'Wiadomość została wysłana';
+                $scope.dest = "";
+                $scope.subject = "";
+                $scope.content = "";
+                $scope.handler.msg = 'The message has been sent';
                 $scope.handler.status = true;
 
             }, function (response) {
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.data);
+                $scope.handler.status = true;
                 if(response.data) {
                     $scope.handler.msg = response.data.errors[0];
-                    $scope.handler.status = true;
+
                 }else {
-                    $scope.handler.msg = 'Podaj prawidłowego adresata';
-                    $scope.handler.status = true;
+                    $scope.handler.msg = 'An unknown error has occurred';
                 }
             });
             $scope.to = null;

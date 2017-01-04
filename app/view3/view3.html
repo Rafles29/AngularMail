@@ -1,32 +1,32 @@
 <div ng-show="logged">
-    <h2 class="text-center" ng-show="handler.status">{{handler.msg}}</h2>
-    <h3 class="col-sm-offset-2 col-sm-10">Nowa Wiadomość</h3>
+    <h3 class="col-sm-offset-2 col-sm-10">New Message</h3>
     <form class="form-horizontal">
         <div class="form-group">
-            <label for="adresat" class="col-sm-2 control-label">Adresat</label>
+            <label for="to" class="col-sm-2 control-label">To</label>
             <div class="col-sm-8">
-                <input ng-model="dest" type="text" class="form-control" id="adresat" placeholder="1,2,3,4">
+                <input ng-model="dest" type="text" class="form-control" id="to" placeholder="1,2,3,4" required="required">
             </div>
         </div>
         <div class="form-group">
-            <label for="temat" class="col-sm-2 control-label">Temat</label>
+            <label for="subject" class="col-sm-2 control-label">Subject</label>
             <div class="col-sm-8">
-                <input ng-model="subject" type="text" class="form-control" id="temat" placeholder="*********">
+                <input ng-model="subject" type="text" class="form-control" id="subject" placeholder="*********" required="required">
             </div>
         </div>
         <div class="form-group">
-            <label for="tresc" class="col-sm-2 control-label">Treść</label>
+            <label for="content" class="col-sm-2 control-label">Content</label>
             <div class="col-sm-8">
-                <textarea ng-model="content" class="form-control" id="tresc" placeholder="Treść" rows="5"></textarea>
+                <textarea ng-model="content" class="form-control" id="content" placeholder="Message Content" rows="5" required="required"></textarea >
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-8">
-                <a href="" ng-click="sendMsg()" type="submit" class="btn btn-info btn-lg btn-block">Wyślij</a>
+                <a href="" ng-click="sendMsg()" type="submit" class="btn btn-info btn-lg btn-block">Send</a>
             </div>
         </div>
     </form>
+    <div class="alert alert-danger alert-dismissible text-center" ng-show="handler.status"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{handler.msg}}</div>
 </div>
 <div ng-hide="logged">
-    <h2>Musisz się najpierw zalogować</h2>
+    <h2>You have to login first</h2>
 </div>

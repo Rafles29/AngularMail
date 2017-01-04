@@ -3,7 +3,7 @@
 angular.module('myApp.login', [])
 
     .factory('login', ['$http', function ($http) {
-        function getToken(login, password, callback) {
+        function getToken(login, password, callback, error) {
             $http({
                 method: 'POST',
                 url: 'http://edi.iem.pw.edu.pl/bach/mail/api/login',
@@ -11,11 +11,7 @@ angular.module('myApp.login', [])
                     "login": login,
                     "password": password
                 }
-            }).then(callback, function (response) {
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.data);
-            });
+            }).then(callback, error);
         }
         function getUserName(token, id, callback) {
             $http({
