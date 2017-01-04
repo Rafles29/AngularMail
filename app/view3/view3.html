@@ -1,16 +1,16 @@
 <div ng-show="logged">
     <h3 class="col-sm-offset-2 col-sm-10">New Message</h3>
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-submit="sendMsg()">
         <div class="form-group">
             <label for="to" class="col-sm-2 control-label">To</label>
             <div class="col-sm-8">
-                <input ng-model="dest" type="text" class="form-control" id="to" placeholder="1,2,3,4" required="required">
+                <input ng-model="dest" type="text" class="form-control" id="to" placeholder="2,3... or linus,fey..." required="required">
             </div>
         </div>
         <div class="form-group">
             <label for="subject" class="col-sm-2 control-label">Subject</label>
             <div class="col-sm-8">
-                <input ng-model="subject" type="text" class="form-control" id="subject" placeholder="*********" required="required">
+                <input ng-model="subject" type="text" class="form-control" id="subject" placeholder="My Subject" required="required">
             </div>
         </div>
         <div class="form-group">
@@ -21,11 +21,11 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-8">
-                <a href="" ng-click="sendMsg()" type="submit" class="btn btn-info btn-lg btn-block">Send</a>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
             </div>
         </div>
     </form>
-    <div class="alert alert-danger alert-dismissible text-center" ng-show="handler.status"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{handler.msg}}</div>
+    <div class="alert alert-danger text-center" ng-show="handler.status">{{handler.msg}}</div>
 </div>
 <div ng-hide="logged">
     <h2>You have to login first</h2>

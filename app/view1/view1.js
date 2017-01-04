@@ -13,6 +13,13 @@ angular.module('myApp.view1', ['ngRoute', 'myApp.messages'])
     var token = $rootScope.token;
     messages.message($routeParams.id,token,function (res) {
         $scope.message = res.data;
+    }, function (res) {
+        $scope.message = {
+            "id": "",
+            "content": res.data.error,
+            "from": res.data.error, "to": res.data.error,
+            "subject": res.data.error
+        }
     });
     $scope.back = function () {
         window.history.back();

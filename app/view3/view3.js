@@ -21,6 +21,14 @@ angular.module('myApp.view3', ['ngRoute','myApp.messages'])
         $scope.content = "";
         $scope.done = false;
         $scope.sendMsg = function () {
+            if(!$.isNumeric($scope.dest)) {
+                    var index;
+                    for(index in $rootScope.users) {
+                        if( $rootScope.users[index].username == $scope.dest) {
+                            $scope.dest = $rootScope.users[index].uid;
+                        }
+                    }
+            }
             var msg ={
                 content: $scope.content,
                 from: $rootScope.myUID, to: parseInt($scope.dest),

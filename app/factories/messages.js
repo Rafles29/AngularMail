@@ -5,18 +5,14 @@
 angular.module('myApp.messages', [])
 
     .factory('messages', ['$http', function ($http) {
-        function getMessages(token, callback) {
+        function getMessages(token, callback, error) {
             $http({
                 method: 'GET',
                 url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages',
                 headers: {
                     "token" : token
                 }
-            }).then(callback, function (response) {
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.data);
-            });
+            }).then(callback, error);
         }
         function handleMessage(method,id,token, callback, error) {
             $http({
@@ -27,12 +23,8 @@ angular.module('myApp.messages', [])
                 }
             }).then(callback, error);
         }
-        function getMessage(id,token,callback) {
-            handleMessage('GET',id,token,callback, function (response) {
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.data);
-            });
+        function getMessage(id,token,callback, error) {
+            handleMessage('GET',id,token,callback, error);
         }
         function deleteMessage(id,token,callback, error) {
             handleMessage('DELETE',id,token,callback, error);
@@ -65,11 +57,21 @@ angular.module('myApp.messages', [])
                 }
             }).then(callback, error);
         }
+        function unreadCount(token, callback, error) {
+            $http({
+                method: 'GET',
+                url: 'http://edi.iem.pw.edu.pl/bach/mail/api/messages/unread/count',
+                headers: {
+                    "token" : token
+                }
+            }).then(callback, error);
+        }
         return {
             messages: getMessages,
             message: getMessage,
             send: sendMessage,
             del: deleteMessage,
-            mark: markMessage
+            mark: markMessage,
+            unread: unreadCount
         };
     }]);

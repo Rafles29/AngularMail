@@ -10,8 +10,8 @@ angular.module('myApp.view', ['ngRoute','myApp.login'])
     }])
 
     .controller('ViewCtrl', ['$rootScope','$scope','login' ,function($rootScope,$scope,login) {
-        $scope.login = "bach";
-        $scope.password = "to-nie-ja";
+        $scope.login = "";
+        $scope.password = "";
         if($rootScope.logged == null) {
             $rootScope.logged = false;
         }
