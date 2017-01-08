@@ -29,7 +29,6 @@ angular.module('myApp.view', ['ngRoute','myApp.login'])
                 });
                 login.getUsers($rootScope.token, function (response) {
                     $rootScope.users = response.data;
-                    console.log($rootScope.users);
                 });
             }, function (res) {
                 $scope.error.msg = res.data.error;
